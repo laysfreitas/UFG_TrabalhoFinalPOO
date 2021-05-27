@@ -7,44 +7,62 @@ public class Loja {
 	private String cnpj;
 	public Endereço endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
-	public Gerente gerenteloja;
-	public ArrayList<Proprietario>proprietarios = new ArrayList<Proprietario>();
 	public ArrayList<Produto>produtos = new ArrayList<Produto>();
 
-	
-	public Loja(String nome, String cnpj) {
+	/* Construtor da classe loja */
+	public Loja(String nome, String cnpj, String local, int numero, Endereço endereco) {
 		this.nome = nome;
 		this.cnpj = cnpj;
 	}
-	void cadastrarProdutos(Produto produto) {
+	
+	/* Método que cadastra um produto */
+	public void cadastrarProdutos(Produto produto) {
 		produtos.add(produto);
 	}
 	
+	/* Método que cadastra um funcionário */
 	public void cadastrarFuncionarioLoja(Funcionario funcionario) {
 		funcionarios.add(funcionario);
 	}
 	
+	/* Método que demite um funcionário */
 	public void demiteFuncionario(Funcionario funcionario) {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
 			if((funcionario.cpf).equals(funcionarios.get(i).cpf)) {
-				funcionarios.remove(i);
+				funcionarios.get(i).remove(i);
 			}
 		}
 		
 	}
 	
-	public int consultarProduto(Produto produto) {
+	/* Método que consulta a quantidade de quantidade */
+	public int consultaProduto(Produto produto) {
 		for(int i = 0 ; i < produtos.size() ; i++) {
 			if(produto.codigo == produtos.get(i).codigo) {
-				produtos.get(i).qtdProduto();
+				return produtos.get(i).qtdProduto();
 			}
 		}
 	}
 	
-	
-	public void cadastrarProprietarioLoja(Proprietario proprietario) {
-		proprietarios.add(proprietario);
+	/* Método que altera o valor de um produto */
+	public void alteraValorProduto(Produto produto, double novoValor) {
+		for(int i = 0 ; i < produtos.size() ; i++) {
+			if(produto.codigo == produtos.get(i).codigo) {
+				produtos.get(i).valor = novoValor;
+			}
+		}
+	}
+
+	/* Método que exclui um produto */
+	public void excluirProduto(Produto produto) {
+		
+		for(int i = 0 ; i < produtos.size() ; i++) {
+			if((produtos.codigo).equals(produtos.get(i).codigos)) {
+				produtos.get(i).remove(i);
+			}
+		}
+		
 	}
 	
 }
