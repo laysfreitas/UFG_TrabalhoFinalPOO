@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 
-public ArrayList<Compra> compras;
+public class Cliente {
+    public Compra compra;
+    public ContaCliente conta;
 
-    public void realizaCompra(Produto produto){
-        
+    public void realizaCompra(Compra compra){
+        conta.adicionaCompra(compra);
     }
     public boolean efetuaPagamento(Compra compra){
-    
+        conta.pagamento(compra.valor);
     }
     public void solicitaTroca(Produto p1, Produto p2){
         p1.quantidade++;
@@ -22,3 +24,4 @@ public ArrayList<Compra> compras;
             }
         }
     }
+}
