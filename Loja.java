@@ -5,16 +5,19 @@ public class Loja {
 	public String local;
 	public int numero;
 	private String cnpj;
-	public Endereço endereco;
+	public Endereco endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public ArrayList<Produto>produtos = new ArrayList<Produto>();
 	public ArrayList<Cliente> clientes = new ArrayList()<Cliente>;
-        public static double ganho = 0;
+    public static double ganho = 0;
 
 	/* Construtor da classe loja */
-	public Loja(String nome, String cnpj, String local, int numero, Endereço endereco) {
+	public Loja(String nome, String cnpj, String local, int numero, Endereco endereco) {
 		this.nome = nome;
 		this.cnpj = cnpj;
+		this.local = local;
+		this.numero = numero;
+		this.endereco = endereco;
 	}
 	
 	/* Método que cadastra um produto */

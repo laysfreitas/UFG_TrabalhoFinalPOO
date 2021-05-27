@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class Shopping {
 	private String cnpj;
 	public String nome;
-	public Endereço endereço;
+	public Endereco endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public ArrayList<Loja>lojas = new ArrayList<Loja>();
 	
 	/* Método cosntrutor do Shopping*/
-	public Shopping(String cnpj, String nome, Endereço endereço) {
+	public Shopping(String cnpj, String nome, Endereço endereco) {
 		this.cnpj = cnpj;
-		this.endereço = endereço;
+		this.endereco = endereco;
 		this.nome = nome;
 	}
 	
