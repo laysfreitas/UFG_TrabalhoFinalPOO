@@ -13,6 +13,7 @@ public class Cliente {
     }
     public boolean efetuaPagamento(Compra compra){
         conta.pagamento(compra.valor);
+        return true;
     }
     public void solicitaTroca(Produto p1, Produto p2){
         p1.quantidade++;
