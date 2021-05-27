@@ -8,6 +8,8 @@ public class Loja {
 	public Endereço endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public ArrayList<Produto>produtos = new ArrayList<Produto>();
+	public ArrayList<Cliente> clientes = new ArrayList()<Cliente>;
+        public static double ganho = 0;
 
 	/* Construtor da classe loja */
 	public Loja(String nome, String cnpj, String local, int numero, Endereço endereco) {
@@ -65,4 +67,7 @@ public class Loja {
 		
 	}
 	
+	public void recebePagamento(double valor){
+            this.ganho += valor;
+        }
 }
