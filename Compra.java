@@ -2,11 +2,14 @@
 package projectfinalpoo;
 
 
+import java.util.Date;
+
 public class Compra {
     public int codigo;
     public ArrayList<Produto> produtos;
     public double valor = 0 ;
     public Funcionario vendedor;
+    public Date data;
 
     public double calculaTotal(ArrayList<Produto> produtos){
         int i;
