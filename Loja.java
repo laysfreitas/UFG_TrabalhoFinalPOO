@@ -43,7 +43,6 @@ public class Loja {
 	}
 	
 	
-	public 
 	public void cadastrarProprietarioLoja(Proprietario proprietario) {
 		proprietarios.add(proprietario);
 	}
