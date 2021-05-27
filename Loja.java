@@ -5,7 +5,7 @@ public class Loja {
 	public String local;
 	public int numero;
 	private String cnpj;
-	public Endereço endereco;
+	public EndereÃ§o endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public Gerente gerenteloja;
 	public ArrayList<Proprietario>proprietarios = new ArrayList<Proprietario>();
@@ -24,6 +24,26 @@ public class Loja {
 		funcionarios.add(funcionario);
 	}
 	
+	public void demiteFuncionario(Funcionario funcionario) {
+		
+		for(int i = 0 ; i < funcionarios.size() ; i++) {
+			if((funcionario.cpf).equals(funcionarios.get(i).cpf)) {
+				funcionarios.remove(i);
+			}
+		}
+		
+	}
+	
+	public int consultarProduto(Produto produto) {
+		for(int i = 0 ; i < produtos.size() ; i++) {
+			if(produto.codigo == produtos.get(i).codigo) {
+				produtos.get(i).qtdProduto();
+			}
+		}
+	}
+	
+	
+	public 
 	public void cadastrarProprietarioLoja(Proprietario proprietario) {
 		proprietarios.add(proprietario);
 	}
