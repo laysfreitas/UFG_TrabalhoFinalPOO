@@ -4,6 +4,10 @@ public class Cliente {
     public Compra compra;
     public ContaCliente conta;
 
+    public Cliente(String nome, String CPF, Endereco endereco, String telefone, ContaCliente conta){
+        super(nome, CPF, endereco, telefone);
+        this.conta = conta;
+    }
     public void realizaCompra(Compra compra){
         conta.adicionaCompra(compra);
     }
