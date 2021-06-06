@@ -20,6 +20,11 @@ public class Loja {
 		this.endereco = endereco;
 	}
 	
+	
+	public String getCNPJ() {
+		return this.cnpj;
+	}
+	
 	/* Método que cadastra um produto */
 	public void cadastrarProdutos(Produto produto) {
 		produtos.add(produto);
@@ -34,18 +39,18 @@ public class Loja {
 	public void demiteFuncionario(Funcionario funcionario) {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
-			if((funcionario.nome).equals(funcionarios.get(i).nome)) {
+			if((funcionario.getCPF()).equals(funcionarios.get(i).getCPF())) {
 				funcionarios.remove(i);
 			}
 		}
 		
 	}
 	
-	/* Método que consulta a quantidade de quantidade */
+	/* Método que consulta a quantidade de produto */
 	public int consultaProduto(Produto produto) {
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if(produto.getCodigo() == produtos.get(i).getCodigo()) {
-				return produtos.get(i).qtdProduto();
+			if(produto.codigo == produtos.get(i).codigo) {
+				return produtos.get(i).quantidade;
 			}
 		}
 		return 0;
@@ -54,21 +59,20 @@ public class Loja {
 	/* Método que altera o valor de um produto */
 	public void alteraValorProduto(Produto produto, double novoValor) {
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if(produto.getCodigo() == produtos.get(i).getCodigo()) {
-				produtos.get(i).valor = novoValor;
+			if(produto.codigo == produtos.get(i).codigo) {
+				produtos.get(i).alteraValorProduto(novoValor);
 			}
 		}
 	}
 
-	/* Método que exclui um produto */
+	/* Método que vende um produto */
 	public void vendaProduto(Produto produto, double valor) {
 		
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if((produto.getCodigo()) == produtos.get(i).getCodigo()) {
+			if((produto.codigo) == produtos.get(i).codigo) {
 				produtos.remove(i);
 			}
 		}
 		this.ganho += valor;
-		
 	}
 }

@@ -14,6 +14,10 @@ public class Shopping {
 		this.nome = nome;
 	}
 	
+	public String getCNPJ() {
+		return this.cnpj;
+	}
+	
 	/* Método para cadastrar loja */
 	public void cadastrarLoja(Loja loja) {
 		lojas.add(loja);
@@ -28,7 +32,7 @@ public class Shopping {
 	public void demiteFuncionario(Funcionario funcionario) {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
-			if((funcionario.nome).equals(funcionarios.get(i).nome)) {
+			if((funcionario.getCPF()).equals(funcionarios.get(i).getCPF())) {
 				funcionarios.remove(i);
 			}
 		}

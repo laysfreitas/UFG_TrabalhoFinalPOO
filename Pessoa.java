@@ -1,4 +1,3 @@
-
 public abstract class Pessoa {
 	public String nome;
 	private String cpf;
@@ -11,5 +10,16 @@ public abstract class Pessoa {
 		this.endereco = endereco;
 		this.telefone = telefone;
 	}
+
+	public String getCPF() {
+		return this.cpf;
+	}
 	
+	public Endereco getEndereco() {
+		return this.endereco;
+	}
+	
+	public String getTelefone() {
+		return this.telefone;
+	}
 }
