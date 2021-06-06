@@ -8,7 +8,7 @@ public class Loja {
 	public Endereco endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public ArrayList<Produto>produtos = new ArrayList<Produto>();
-	public ArrayList<Cliente> clientes = new ArrayList()<Cliente>;
+	public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     public static double ganho = 0;
 
 	/* Construtor da classe loja */
@@ -34,8 +34,8 @@ public class Loja {
 	public void demiteFuncionario(Funcionario funcionario) {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
-			if((funcionario.cpf).equals(funcionarios.get(i).cpf)) {
-				funcionarios.get(i).remove(i);
+			if((funcionario.nome).equals(funcionarios.get(i).nome)) {
+				funcionarios.remove(i);
 			}
 		}
 		
@@ -44,33 +44,31 @@ public class Loja {
 	/* Método que consulta a quantidade de quantidade */
 	public int consultaProduto(Produto produto) {
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if(produto.codigo == produtos.get(i).codigo) {
+			if(produto.getCodigo() == produtos.get(i).getCodigo()) {
 				return produtos.get(i).qtdProduto();
 			}
 		}
+		return 0;
 	}
 	
 	/* Método que altera o valor de um produto */
 	public void alteraValorProduto(Produto produto, double novoValor) {
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if(produto.codigo == produtos.get(i).codigo) {
+			if(produto.getCodigo() == produtos.get(i).getCodigo()) {
 				produtos.get(i).valor = novoValor;
 			}
 		}
 	}
 
 	/* Método que exclui um produto */
-	public void excluirProduto(Produto produto) {
+	public void vendaProduto(Produto produto, double valor) {
 		
 		for(int i = 0 ; i < produtos.size() ; i++) {
-			if((produtos.codigo).equals(produtos.get(i).codigos)) {
-				produtos.get(i).remove(i);
+			if((produto.getCodigo()) == produtos.get(i).getCodigo()) {
+				produtos.remove(i);
 			}
 		}
+		this.ganho += valor;
 		
 	}
-	
-	public void recebePagamento(double valor){
-            this.ganho += valor;
-        }
 }

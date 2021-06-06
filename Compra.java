@@ -1,8 +1,5 @@
-
-package projectfinalpoo;
-
-
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Compra {
     public int codigo;
@@ -11,16 +8,15 @@ public class Compra {
     public Funcionario vendedor;
     public Date data;
 
-    public double calculaTotal(ArrayList<Produto> produtos){
-        int i;
-        for(i=0; i<produtos.size(); i++){
-            this.valor += produtos.get(i).valor;
+    public double calculaTotal(ArrayList<Produto>produto){
+        for(int i=0; i<produto.size(); i++){
+            this.valor += produto.get(i).valor;
         }
+        return valor;
     }
 
     public void vendaEstoque(Produto produto){
-        int i;
-        for(i=0; i<produtos.size();i++){
+        for(int i=0; i<produtos.size();i++){
             produtos.get(i).quantidade--;
         }
     }

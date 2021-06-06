@@ -8,7 +8,7 @@ public class Shopping {
 	public ArrayList<Loja>lojas = new ArrayList<Loja>();
 	
 	/* Método cosntrutor do Shopping*/
-	public Shopping(String cnpj, String nome, Endereço endereco) {
+	public Shopping(String cnpj, String nome, Endereco endereco) {
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.nome = nome;
@@ -28,8 +28,8 @@ public class Shopping {
 	public void demiteFuncionario(Funcionario funcionario) {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
-			if((funcionario.cpf).equals(funcionarios.get(i).cpf)) {
-				funcionarios.get(i).remove(i);
+			if((funcionario.nome).equals(funcionarios.get(i).nome)) {
+				funcionarios.remove(i);
 			}
 		}
 		

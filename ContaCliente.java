@@ -1,8 +1,8 @@
-package projectfinalpoo;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class ContaCliente {
-    public ArrayList<Compra> compras = new ArrayList();
+    public ArrayList<Compra>compras = new ArrayList<Compra>();
     public Cliente cliente;
     public Date data;
     public Loja loja;
@@ -11,7 +11,4 @@ public class ContaCliente {
         compras.add(compra);
     }
 
-    public void pagamento(Compra compra){
-        loja.recebePagamento(compra.valor);
-    }
 }
