@@ -14,4 +14,8 @@ public class Endereco {
 		this.cep = cep;
 		this.complemento = complemento;
 	}
+	
+	public String toString() {
+		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cep + "( " + this.complemento + " )" + "\n"; 
+	}
 }

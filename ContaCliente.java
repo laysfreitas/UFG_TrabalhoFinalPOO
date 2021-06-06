@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ContaCliente {
     public ArrayList<Compra>compras = new ArrayList<Compra>();
     public Cliente cliente;
-    public Date data;
+    public Date data; // data de criação da conta
     public Loja loja;
 
     
@@ -23,9 +23,18 @@ public class ContaCliente {
         this.cliente = cliente;
     }
     
-    public void solicitaTroca(Produto p1, Produto p2, int codigoCompra){
-    	for( int  i = 0; i < compras.size(); i++) {
-    		
+    public void solicitaTroca(Produto p1,int qtdTrocada, Produto p2,int qtdRecebida, int codigoCompra){
+    	for(int i = 0; i < compras.size(); i++) {
+    		if(compras.get(i).codigo == codigoCompra) {
+    			for(int j = 0; j < (compras.get(i)).produtos.size(); j++) {
+    				if(compras.get(i).produtos.get(j).codigo == p1.codigo){
+    					compras.get(i).produtos.remove(j);
+    					compras.get(i).vendedor.loja.produtos.get(j).acrescentaEstoque(qtdTrocada);
+    					compras.get(i).adicionaProdutos(p2);
+    					compras.get(i).vendaProduto(p2, qtdRecebida);
+    				}
+    			}
+    		}
     	}
     }
 

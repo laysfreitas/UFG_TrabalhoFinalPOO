@@ -2,22 +2,18 @@ import java.util.ArrayList;
 
 public class Loja {
 	public String nome;
-	public String local;
 	public int numero;
 	private String cnpj;
-	public Endereco endereco;
 	public ArrayList<Funcionario>funcionarios = new ArrayList<Funcionario>();
 	public ArrayList<Produto>produtos = new ArrayList<Produto>();
 	public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     public static double ganho = 0;
 
 	/* Construtor da classe loja */
-	public Loja(String nome, String cnpj, String local, int numero, Endereco endereco) {
+	public Loja(String nome, String cnpj, int numero) {
 		this.nome = nome;
 		this.cnpj = cnpj;
-		this.local = local;
 		this.numero = numero;
-		this.endereco = endereco;
 	}
 	
 	
@@ -66,13 +62,18 @@ public class Loja {
 	}
 
 	/* Método que vende um produto */
-	public void vendaProduto(Produto produto, double valor) {
-		
+	public double reduzirEstoque(Produto produto, int quantidade) {
+		double gasto = 0;
 		for(int i = 0 ; i < produtos.size() ; i++) {
 			if((produto.codigo) == produtos.get(i).codigo) {
-				produtos.remove(i);
+				gasto += produtos.get(i).vender(quantidade);
 			}
 		}
-		this.ganho += valor;
+		ganho += gasto;
+		return gasto;
+	}
+	
+	public double getGanho(){
+		return ganho;
 	}
 }

@@ -8,20 +8,18 @@ public class Compra {
     public Funcionario vendedor;
     public Date data;
 
-    public double calculaTotal(ArrayList<Produto>produto){
-        for(int i = 0; i < produto.size(); i++){
-            this.valor += produto.get(i).valor_produto;
+    public double vendaProduto(Produto produto, int quantidade){
+        for(int i = 0; i < produtos.size(); i++){
+            valor += this.vendedor.loja.reduzirEstoque(produto, quantidade);
         }
         return valor;
     }
-
-    public void vendaEstoque(Produto produto){
-        for(int i = 0; i < produtos.size(); i++){
-            produtos.get(i).quantidade--;
-        }
-    }
     
-    public void emitirComprovante(Compra compra) {
-    	
+    public String emitirComprovante() {
+    	String p = this.codigo + ": \n";
+        for(int i = 0; i < produtos.size(); i++){
+            p = p + " - " + produtos.get(i).nome_produto + "(" + produtos.get(i).quantidade + ")";
+        }
+        return p;
     }
 }
