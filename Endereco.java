@@ -1,3 +1,4 @@
+package projectfinalpoo;
 
 public class Endereco {
 	public String rua;
@@ -20,4 +21,3 @@ public class Endereco {
 		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cep + "( " + this.complemento + " )" + "\n"; 
 	}
 }
-
