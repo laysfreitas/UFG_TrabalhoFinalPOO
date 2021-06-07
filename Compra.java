@@ -21,13 +21,11 @@ public class Compra {
     
     
     public void adicionaProdutos(Produto produto, int qtd) {
-    	produto.quantidade = qtd;
+    	produto.quantidadeCompra = qtd;
     	produtos.add(produto);
-    }
-    
-    public void vendaProduto(Produto produto, int qtd) {
     	this.vendedor.loja.reduzirEstoque(produto, qtd);
     }
+
     
     /* Método que retorna o valor da compra e reduz os produtos 
      * comprados do estoque da loja de onde foram comprados*/
@@ -36,7 +34,7 @@ public class Compra {
     public double valorCompra( ){
     	this.valor = 0;
     	for(int j = 0; j < produtos.size(); j++){
-	        this.valor += (produtos.get(j).valor_produto)*(produtos.get(j).quantidade);
+	        this.valor += (produtos.get(j).valor_produto)*(produtos.get(j).quantidadeCompra);
     	}
         return valor;
     }
@@ -47,7 +45,7 @@ public class Compra {
     public String emitirComprovante() {
     	String p = this.codigo + ": \n";
         for(int i = 0; i < produtos.size(); i++){
-            p = p + " - " + produtos.get(i).nome_produto + "(" + produtos.get(i).quantidade + ")";
+            p = p + " - " + produtos.get(i).nome_produto + "(" + produtos.get(i).quantidadeCompra + ")";
         }
         return p;
     }

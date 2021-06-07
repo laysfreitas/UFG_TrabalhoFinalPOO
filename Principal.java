@@ -44,7 +44,7 @@ public class Principal {
 		ContaCliente conta1 = new ContaCliente(c1,data,loja1);
 		ContaCliente conta2 = new ContaCliente(c1,data,loja2);
 		
-		Produto p1 = new Produto("Blusa",100,"amarela",24.56,5);
+		Produto p1 = new Produto("Blusa",100,"amarela",24.56,6);
 		Produto p2 = new Produto("Camiseta Sr.K",112,"branca",49.99,10);
 		Produto p3 = new Produto("Sapato",100,"Salto alto preto",112.00,2);
 		
@@ -61,10 +61,6 @@ public class Principal {
 		
 		conta1.adicionaCompra(compra1);
 		conta2.adicionaCompra(compra2);
-	
-		compra1.vendaProduto(p1,2);
-		compra2.vendaProduto(p2,3);
-		compra1.vendaProduto(p3,1);
 		
 		System.out.println(df.format(compra1.valorCompra()));
 		System.out.println(df.format(compra2.valorCompra()));
