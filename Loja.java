@@ -1,3 +1,5 @@
+
+package projectfinalpoo;
 import java.util.ArrayList;
 
 public class Loja {
