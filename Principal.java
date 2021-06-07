@@ -61,6 +61,10 @@ public class Principal {
 		
 		conta1.adicionaCompra(compra1);
 		conta2.adicionaCompra(compra2);
+	
+		compra1.vendaProduto(p1,2);
+		compra2.vendaProduto(p2,3);
+		compra1.vendaProduto(p3,1);
 		
 		System.out.println(df.format(compra1.valorCompra()));
 		System.out.println(df.format(compra2.valorCompra()));

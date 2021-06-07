@@ -21,9 +21,12 @@ public class Compra {
     
     
     public void adicionaProdutos(Produto produto, int qtd) {
-    	this.vendedor.loja.reduzirEstoque(produto, qtd);
     	produto.quantidade = qtd;
     	produtos.add(produto);
+    }
+    
+    public void vendaProduto(Produto produto, int qtd) {
+    	this.vendedor.loja.reduzirEstoque(produto, qtd);
     }
     
     /* Método que retorna o valor da compra e reduz os produtos 

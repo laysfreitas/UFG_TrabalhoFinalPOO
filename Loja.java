@@ -71,6 +71,7 @@ public class Loja {
 		for(int i = 0 ; i < produtos.size() ; i++) {
 			if((produto.codigo) == produtos.get(i).codigo) {
 				gasto += produtos.get(i).vender(quantidade);
+				produtos.get(i).quantidade -= quantidade;
 			}
 		}
 		ganho += gasto;
