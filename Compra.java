@@ -1,3 +1,5 @@
+package projectfinalpoo;
+
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -23,7 +25,8 @@ public class Compra {
     public void adicionaProdutos(Produto produto, int qtd) {
     	produto.quantidadeCompra = qtd;
     	produtos.add(produto);
-    	this.vendedor.loja.reduzirEstoque(produto, qtd);
+        this.vendedor.loja.reduzirEstoque(produto, qtd);
+    	
     }
 
     
