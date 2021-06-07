@@ -1,4 +1,7 @@
+package projectfinalpoo;
+
 import java.util.ArrayList;
+
 
 public class Shopping {
 	private String cnpj;
