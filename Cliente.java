@@ -1,3 +1,5 @@
+package projectfinalpoo;
+
 public class Cliente extends Pessoa {
       
 	public ContaCliente conta;
