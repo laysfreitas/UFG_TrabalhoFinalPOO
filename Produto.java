@@ -1,3 +1,5 @@
+package projectfinalpoo;
+
 public class Produto {
 	public String nome_produto;
 	public int codigo;
@@ -19,7 +21,7 @@ public class Produto {
 		if(this.quantidadeEstoque < qtdvendida) {
 			return 0;
 		}else {
-			this.quantidadeEstoque = this.quantidadeEstoque - qtdvendida;
+                        this.quantidadeEstoque -= qtdvendida;
 			return qtdvendida*(this.valor_produto);
 		}
 	}
