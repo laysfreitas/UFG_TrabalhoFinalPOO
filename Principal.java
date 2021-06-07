@@ -1,3 +1,6 @@
+package projectfinalpoo;
+
+
 import java.util.Date;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,13 +47,14 @@ public class Principal {
 		ContaCliente conta1 = new ContaCliente(c1,data,loja1);
 		ContaCliente conta2 = new ContaCliente(c1,data,loja2);
 		
-		Produto p1 = new Produto("Blusa",100,"amarela",24.56,6);
+		Produto p1 = new Produto("Blusa",100,"amarela",24.56,5);
 		Produto p2 = new Produto("Camiseta Sr.K",112,"branca",49.99,10);
-		Produto p3 = new Produto("Sapato",100,"Salto alto preto",112.00,2);
+		Produto p3 = new Produto("Sapato",113,"Salto alto preto",112.00,2);
 		
 		loja1.cadastrarProdutos(p1);
+                loja1.cadastrarProdutos(p3);
 		loja2.cadastrarProdutos(p2);
-		loja1.cadastrarProdutos(p3);
+		
 		
 		Compra compra1 = new Compra(1,data,f1);
 		Compra compra2 = new Compra(2,data,f2);
