@@ -21,6 +21,10 @@ public class Loja {
 		return this.cnpj;
 	}
 	
+	public double getGanho(){
+		return ganho;
+	}
+	
 	/* Método que cadastra um produto */
 	public void cadastrarProdutos(Produto produto) {
 		produtos.add(produto);
@@ -73,7 +77,4 @@ public class Loja {
 		return gasto;
 	}
 	
-	public double getGanho(){
-		return ganho;
-	}
 }

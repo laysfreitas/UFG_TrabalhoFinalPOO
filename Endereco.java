@@ -15,7 +15,9 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 	
+	/* Método que retorna os atributos do endereço */
 	public String toString() {
 		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cep + "( " + this.complemento + " )" + "\n"; 
 	}
 }
+

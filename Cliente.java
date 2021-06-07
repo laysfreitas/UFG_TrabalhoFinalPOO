@@ -1,18 +1,16 @@
 public class Cliente extends Pessoa {
-
-	public Compra compra;
+      
 	public ContaCliente conta;
 
-	public Cliente(String nome, String cpf, Endereco endereco, String telefone, ContaCliente conta){
+	/* Construtor da classe Cliente*/
+	public Cliente(String nome, String cpf, Endereco endereco, String telefone){
 		super(nome, cpf, endereco, telefone);
-		this.conta = conta;
-	}
-	public void realizaCompra(Compra compra){
-		conta.adicionaCompra(compra);
 	}
 	
-	public void clienteEConta(ContaCliente conta) {
-		this.conta = conta;
+	/* Método que chama o método da classe ContaCliente 
+	 * para vincular a compra na conta do cliente */
+	public void realizaCompra(Compra compra){
+		this.conta.adicionaCompra(compra);
 	}
-
+	
 }
