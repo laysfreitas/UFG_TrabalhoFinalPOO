@@ -1,80 +1,106 @@
 package projectfinalpoo;
 
-
 import java.util.Date;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Principal {
 
 	public static void main(String[] args){
-		DecimalFormat df = new DecimalFormat("###.##");
 		
-		Endereco end1 = new Endereco("Rua Pedro Araujo Lima","Capuava",127,"74450190","Quadra 21, Lote 15");	
-		Shopping shop1 = new Shopping("12365478925","Portal Shopping",end1);
-		
-		Loja loja1 = new Loja("Riachuello","126985473",1);
-		Loja loja2 = new Loja("Marisa","852369741",2);
-		Loja loja3 = new Loja("Renner","15896324",3);
-		
-		Endereco end2 = new Endereco("Av. Neddermeyer","Cidade Jardim",522,"74450210","Quadra 224, Lote 08");
-		Endereco end3 = new Endereco("Av. Esquina","Cidade Jardim",698,"7450625",null);
-		
-		Funcionario f1 = new Funcionario("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
-		Funcionario f2 = new Funcionario("Lays Melo","780.158.057-00",end3,"(62)95248-3600");
-		
-		f1.setLoja(loja1);
-		f2.setLoja(loja2);
-		
-		Cliente c1 = new Cliente("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
-		
-		shop1.cadastrarLoja(loja1);
-		shop1.cadastrarLoja(loja2);
-		shop1.cadastrarLoja(loja3);
-		
-		loja1.cadastrarFuncionarioLoja(f1);
-		loja2.cadastrarFuncionarioLoja(f2);
-		
+		Loja loja1 = null;
+		Endereco end1 = null;
+		Endereco end2 = null;
+		Funcionario f1 = null;
+		Shopping shop1 = null;
+		Cliente c1 = null;
+		Produto p1 = null;
 		
 		Date data = new Date();
 		System.out.println("Data Agora: "+data);
 		
-		ContaCliente conta1 = new ContaCliente(c1,data,loja1);
-		ContaCliente conta2 = new ContaCliente(c1,data,loja2);
 		
-		Produto p1 = new Produto("Blusa",100,"amarela",24.56,5);
-		Produto p2 = new Produto("Camiseta Sr.K",112,"branca",49.99,10);
-		Produto p3 = new Produto("Sapato",113,"Salto alto preto",112.00,2);
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		JOptionPane.showConfirmDialog(null, "Cadastro Shopping");
+		String cnpjshop = JOptionPane.showInputDialog("CNPJ:");
+		String nomeshop = JOptionPane.showInputDialog("Nome:");
+		
+		JOptionPane.showConfirmDialog(null,"Digite o endereço do Shopping!");
+		
+		String rua = JOptionPane.showInputDialog("Rua:");
+		String bairro = JOptionPane.showInputDialog("Bairro:");
+		String numero = JOptionPane.showInputDialog("Numero:");
+		int number = Integer.parseInt(numero);
+		String cep = JOptionPane.showInputDialog("CEP:");
+		String complemento = JOptionPane.showInputDialog("Complemento:");
+		
+		end1 = new Endereco(rua,bairro,number,cep,complemento);
+		shop1 = new Shopping(cnpjshop,nomeshop,end1);
+		
+		String escolha = JOptionPane.showInputDialog("1 - Cadastro Loja\n 2- Comprar Produto\n");
+		int choice = Integer.parseInt(escolha);
+		
+		if(choice==1) {
+			JOptionPane.showConfirmDialog(null, "Cadastrar Loja");
+			
+			String cnpjloja = JOptionPane.showInputDialog("CNPJ da Loja:");
+			String nomeloja = JOptionPane.showInputDialog("Nome da Loja:");
+			String codigoloja = JOptionPane.showInputDialog("Código da Loja:");
+			int cod = Integer.parseInt(codigoloja);
+			
+			loja1 = new Loja(nomeloja,cnpjloja,cod);
+			shop1.cadastrarLoja(loja1);
+			
+			String escolha1 = JOptionPane.showInputDialog("1 - Cadastro Funcionario\n 2- Cadastro Cliente\n 3- Cadastro Produto\n");
+			int choice1 = Integer.parseInt(escolha1);
+			
+			if(choice1 == 1) {
+				end2 = new Endereco("Av. Neddermeyer","Cidade Jardim",522,"74450210","Quadra 224, Lote 08");
+				f1 = new Funcionario("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
+				f1.setLoja(loja1);
+				loja1.cadastrarFuncionarioLoja(f1);
+			}else if(choice1 == 2) {
+				end2 = new Endereco("Av. Esquina","Cidade Jardim",698,"7450625",null);
+				c1 = new Cliente("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
+			}else {
+				
+				JOptionPane.showConfirmDialog(null, "Cadastrar produto");
+				String nomeprod = JOptionPane.showInputDialog("Nome do Produto:");
+				String codigoproduto = JOptionPane.showInputDialog("Codigo do produto:");
+				int codprod = Integer.parseInt(codigoproduto);
+				String descricao = JOptionPane.showInputDialog("Descrição do produto:");
+				String valorproduto = JOptionPane.showInputDialog("Valor do produto:");
+				double valor = Double.parseDouble(valorproduto);
+				String qtdproduto = JOptionPane.showInputDialog("Quatidade do produto:");
+				int qtd = Integer.parseInt(qtdproduto);
+
+				
+				p1 = new Produto(nomeprod,codprod,descricao,valor,qtd);
+			}
+		}else {
+			
+			String codigocompra = JOptionPane.showInputDialog("Código da Loja:");
+			int codcompra = Integer.parseInt(codigocompra);
+			Compra compra1 = new Compra(codcompra,data,f1);
+		}	
+
+		ContaCliente conta1 = new ContaCliente(c1,data,loja1);
 		
 		loja1.cadastrarProdutos(p1);
-                loja1.cadastrarProdutos(p3);
-		loja2.cadastrarProdutos(p2);
 		
 		
 		Compra compra1 = new Compra(1,data,f1);
-		Compra compra2 = new Compra(2,data,f2);
 		
 		compra1.adicionaProdutos(p1,2);
-		compra2.adicionaProdutos(p2,3);
-		compra1.adicionaProdutos(p3,1);
 		
 		conta1.adicionaCompra(compra1);
-		conta2.adicionaCompra(compra2);
 		
 		System.out.println(df.format(compra1.valorCompra()));
-		System.out.println(df.format(compra2.valorCompra()));
 		
 		System.out.println(compra1.emitirComprovante());
-		System.out.println(compra2.emitirComprovante());
 		
 		System.out.println(loja1.consultaProduto(p1));
-		System.out.println(loja2.consultaProduto(p2));
-		System.out.println(loja1.consultaProduto(p3));
 		
 	}
 
