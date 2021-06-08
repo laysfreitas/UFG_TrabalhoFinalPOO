@@ -38,52 +38,60 @@ public class Principal {
 		end1 = new Endereco(rua,bairro,number,cep,complemento);
 		shop1 = new Shopping(cnpjshop,nomeshop,end1);
 		
-		String escolha = JOptionPane.showInputDialog("1 - Cadastro Loja\n 2- Comprar Produto\n");
-		int choice = Integer.parseInt(escolha);
-		
-		if(choice==1) {
-			JOptionPane.showConfirmDialog(null, "Cadastrar Loja");
+		while(true) {
 			
-			String cnpjloja = JOptionPane.showInputDialog("CNPJ da Loja:");
-			String nomeloja = JOptionPane.showInputDialog("Nome da Loja:");
-			String codigoloja = JOptionPane.showInputDialog("Código da Loja:");
-			int cod = Integer.parseInt(codigoloja);
+			String off = JOptionPane.showInputDialog("0-Sair do Programa\n 1-Permanecer");
+			int of = Integer.parseInt(off);
 			
-			loja1 = new Loja(nomeloja,cnpjloja,cod);
-			shop1.cadastrarLoja(loja1);
+			if(of == 0) break;
 			
-			String escolha1 = JOptionPane.showInputDialog("1 - Cadastro Funcionario\n 2- Cadastro Cliente\n 3- Cadastro Produto\n");
-			int choice1 = Integer.parseInt(escolha1);
+			String escolha = JOptionPane.showInputDialog("1 - Cadastro Loja\n 2- Comprar Produto\n");
+			int choice = Integer.parseInt(escolha);
 			
-			if(choice1 == 1) {
-				end2 = new Endereco("Av. Neddermeyer","Cidade Jardim",522,"74450210","Quadra 224, Lote 08");
-				f1 = new Funcionario("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
-				f1.setLoja(loja1);
-				loja1.cadastrarFuncionarioLoja(f1);
-			}else if(choice1 == 2) {
-				end2 = new Endereco("Av. Esquina","Cidade Jardim",698,"7450625",null);
-				c1 = new Cliente("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
+			if(choice==1) {
+				JOptionPane.showConfirmDialog(null, "Cadastrar Loja");
+				
+				String cnpjloja = JOptionPane.showInputDialog("CNPJ da Loja:");
+				String nomeloja = JOptionPane.showInputDialog("Nome da Loja:");
+				String codigoloja = JOptionPane.showInputDialog("Código da Loja:");
+				int cod = Integer.parseInt(codigoloja);
+				
+				loja1 = new Loja(nomeloja,cnpjloja,cod);
+				shop1.cadastrarLoja(loja1);
+				
+				String escolha1 = JOptionPane.showInputDialog("1 - Cadastro Funcionario\n 2- Cadastro Cliente\n 3- Cadastro Produto\n");
+				int choice1 = Integer.parseInt(escolha1);
+				
+				if(choice1 == 1) {
+					end2 = new Endereco("Av. Neddermeyer","Cidade Jardim",522,"74450210","Quadra 224, Lote 08");
+					f1 = new Funcionario("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
+					f1.setLoja(loja1);
+					loja1.cadastrarFuncionarioLoja(f1);
+				}else if(choice1 == 2) {
+					end2 = new Endereco("Av. Esquina","Cidade Jardim",698,"7450625",null);
+					c1 = new Cliente("Laura Bianca","800.069.057-25",end2,"(62)99325-4871");
+				}else {
+					
+					JOptionPane.showConfirmDialog(null, "Cadastrar produto");
+					String nomeprod = JOptionPane.showInputDialog("Nome do Produto:");
+					String codigoproduto = JOptionPane.showInputDialog("Codigo do produto:");
+					int codprod = Integer.parseInt(codigoproduto);
+					String descricao = JOptionPane.showInputDialog("Descrição do produto:");
+					String valorproduto = JOptionPane.showInputDialog("Valor do produto:");
+					double valor = Double.parseDouble(valorproduto);
+					String qtdproduto = JOptionPane.showInputDialog("Quatidade do produto:");
+					int qtd = Integer.parseInt(qtdproduto);
+	
+					
+					p1 = new Produto(nomeprod,codprod,descricao,valor,qtd);
+				}
 			}else {
 				
-				JOptionPane.showConfirmDialog(null, "Cadastrar produto");
-				String nomeprod = JOptionPane.showInputDialog("Nome do Produto:");
-				String codigoproduto = JOptionPane.showInputDialog("Codigo do produto:");
-				int codprod = Integer.parseInt(codigoproduto);
-				String descricao = JOptionPane.showInputDialog("Descrição do produto:");
-				String valorproduto = JOptionPane.showInputDialog("Valor do produto:");
-				double valor = Double.parseDouble(valorproduto);
-				String qtdproduto = JOptionPane.showInputDialog("Quatidade do produto:");
-				int qtd = Integer.parseInt(qtdproduto);
-
-				
-				p1 = new Produto(nomeprod,codprod,descricao,valor,qtd);
+				String codigocompra = JOptionPane.showInputDialog("Código da Loja:");
+				int codcompra = Integer.parseInt(codigocompra);
+				Compra compra1 = new Compra(codcompra,data,f1);
 			}
-		}else {
-			
-			String codigocompra = JOptionPane.showInputDialog("Código da Loja:");
-			int codcompra = Integer.parseInt(codigocompra);
-			Compra compra1 = new Compra(codcompra,data,f1);
-		}	
+		}
 
 		ContaCliente conta1 = new ContaCliente(c1,data,loja1);
 		
