@@ -3,15 +3,15 @@ package projectfinalpoo;
 public class Produto {
 	public String nome_produto;
 	public int codigo;
-	public String descrição;
+	public String descricao;
 	public double valor_produto;
 	public int quantidadeEstoque;
 	public int quantidadeCompra;
 	
-	public Produto(String nome, int codigo, String descrição, double valor, int quantidade) {
+	public Produto(String nome, int codigo, String descricao, double valor, int quantidade) {
 		this.nome_produto = nome;
 		this.codigo = codigo;
-		this.descrição = descrição;
+		this.descricao = descricao;
 		this.valor_produto = valor;
 		this.quantidadeEstoque = quantidade;
 	}
@@ -31,8 +31,9 @@ public class Produto {
 		this.quantidadeEstoque = this.quantidadeEstoque + maisProduto;
 	}
 	
-	/* Método que troca o valor do produto*/
-	public void alteraValorProduto(double novoValor) {
-		this.valor_produto = novoValor;
-	}
+        
+        public String toString(){
+            String mensagem = "\nNome do produto: " + this.nome_produto + "\nDescrição: " + this.descricao + "\nQuantidade: " + this.quantidadeEstoque + "\nValor: " + this.valor_produto + "\n";
+            return mensagem;
+        }
 }
