@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Funcionario extends Pessoa {
 	
-	private double salario;		//salário que recebe
-	private int dependentes; // quantidade de dependentes
+	private double salario = 0;		//salário que recebe
+	private int dependentes = 0; // quantidade de dependentes
 	public Shopping shop;
 	public Loja loja;		// Qual loja o funcionário é contratado
 	public Date data;
@@ -43,5 +43,10 @@ public class Funcionario extends Pessoa {
 	public void acrescentaDependentes(int maisDependentes){
 		this.dependentes = this.dependentes + maisDependentes;
 	}
+        
+        public String toString(){
+            String mensagem = "\nNome: " + this.nome + "\nEndereço: " + this.getEndereco() + "\nTelefone: " + this.getTelefone() + "\nSalário: " + this.salario + "\nDependentes: " + this.dependentes + "\n";
+            return mensagem;
+        }
 	
 }
