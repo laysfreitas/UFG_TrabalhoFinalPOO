@@ -20,7 +20,13 @@ public abstract class Pessoa {
 	public Endereco getEndereco() {
 		return this.endereco;
 	}
-	
+        
+        public void setEndereco(Endereco endereco){
+            this.endereco = endereco;
+        }
+	public void setTelefone(String telefone){
+            this.telefone = telefone;
+        }
 	public String getTelefone() {
 		return this.telefone;
 	}
