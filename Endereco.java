@@ -18,6 +18,6 @@ public class Endereco {
 	
 	/* Método que retorna os atributos do endereço */
 	public String toString() {
-		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cep + "( " + this.complemento + " )" + "\n"; 
+		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cep + "( " + this.complemento + " )"; 
 	}
 }
