@@ -42,7 +42,7 @@ public class Compra {
     
     /* Método que retorna uma String com todos os produtos da compra*/
     public String emitirComprovante() {
-    	String p = this.codigo + ": \n";
+    	String p = "COMPROVANTE\n" + this.codigo + " : \n";
         for(int i = 0; i < produtos.size(); i++){
             p = p + " - " + produtos.get(i).nome_produto + "(" + produtos.get(i).quantidadeCompra + ")";
         }
