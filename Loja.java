@@ -18,6 +18,8 @@ public class Loja {
     public ArrayList<Produto>produtos = new ArrayList<Produto>();
     public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     public double ganho = 0;
+    public Shopping shopping;
+    
 /*-------------------------ARQUIVOS-----------------------------------*/
     File arqEstoque = new File("estoqueLoja.txt");
     File arqFuncLoja = new File("funcionariosLoja.txt");
@@ -25,10 +27,11 @@ public class Loja {
 
 /*--------------------------LOJA---------------------------------------*/
     /* Construtor da classe loja */
-    public Loja(String nome, String cnpj, int numero) {
+    public Loja(String nome, String cnpj, int numero, Shopping shopping) {
 	this.nome = nome;
 	this.cnpj = cnpj;
 	this.numero = numero;
+        this.shopping = shopping;
     }
 	
     public String getCNPJ() {
@@ -56,7 +59,7 @@ public class Loja {
     
     public void salvarEstoque(ArrayList<Produto> produtos) throws IOException{
         if(arqEstoque.exists())
-                arqEstoque.delete();
+            arqEstoque.delete();
         File arqEstoque = new File("estoqueLoja.txt"); 
         
         FileWriter fw = new FileWriter(arqEstoque, true);
@@ -72,9 +75,9 @@ public class Loja {
     }
     
      /* Método que consulta a quantidade de um produto */
-    public int consultaProduto(Produto produto) {
+    public int consultaProduto(int codProduto) {
 	for(int i = 0 ; i < produtos.size() ; i++) {
-            if(produto.codigo == produtos.get(i).codigo) {
+            if(codProduto == produtos.get(i).codigo) {
 		return produtos.get(i).quantidadeEstoque;
             }
 	}
@@ -82,9 +85,9 @@ public class Loja {
     }
 	
     /* Método que altera o valor de um produto */
-    public void alteraValorProduto(Produto produto, double novoValor) throws IOException {
+    public void alteraValorProduto(int codProduto, double novoValor) throws IOException {
 	for(int i = 0 ; i < produtos.size() ; i++) {
-            if(produto.codigo == produtos.get(i).codigo) {
+            if(codProduto == produtos.get(i).codigo) {
                 produtos.get(i).valor_produto = novoValor;
             }
 	}
@@ -113,7 +116,7 @@ public class Loja {
         while((s = in.readLine())!= null){
             total+=s + "\n";
         }
-        JOptionPane.showMessageDialog(null, "Produtos", "Estoque loja", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, total, "Estoque loja", JOptionPane.PLAIN_MESSAGE);
         f.close();
         in.close();
     }
@@ -135,10 +138,10 @@ public class Loja {
     }
 	
     /* Método que demite um funcionário */
-    public void demiteFuncionario(Funcionario funcionario) throws IOException {
+    public void demiteFuncionario(String CPF) throws IOException {
 		
 	for(int i = 0 ; i < funcionarios.size() ; i++) {
-            if((funcionario.getCPF()).equals(funcionarios.get(i).getCPF())) {
+            if(CPF.equals(funcionarios.get(i).getCPF())) {
                 funcionarios.remove(i);
                 salvaFuncionarios();
             }
@@ -149,7 +152,7 @@ public class Loja {
     /* Método que salva funcionarios em arquivo */
     public void salvaFuncionarios() throws IOException{
         if(arqFuncLoja.exists())
-                arqFuncLoja.delete();
+            arqFuncLoja.delete();
         File arqFuncLoja = new File("funcionariosLoja.txt"); 
         FileWriter fw = new FileWriter(arqFuncLoja, true);
         PrintWriter pw = new PrintWriter(fw);
@@ -175,14 +178,15 @@ public class Loja {
         in.close();
     }
 /*---------------------------------CLIENTES------------------------------------------------------------*/
+    /*O MÉTODO DE CLIENTE DE CRIAR CONTA JÁ EXECUTA ESSE MÉTODO*/
     public void cadastrarCliente(Cliente cliente) throws IOException{
         clientes.add(cliente);
         salvaClientes();
     }
-    public void excluiCliente(Cliente cliente) throws IOException{
+    public void excluiCliente(String CPF) throws IOException{
         int i, flag=0;
         for(i=0; i<clientes.size(); i++){
-            if(clientes.get(i).getCPF().equals(cliente.getCPF())){
+            if(clientes.get(i).getCPF().equals(CPF)){
                 clientes.remove(i);
                 flag++;
             }
@@ -197,13 +201,13 @@ public class Loja {
         salvaClientes();
     }
     
-    public void alteraCliente(Cliente cliente) throws IOException{
+    public void alteraCliente(String CPF) throws IOException{
         int i;
         String novoValor = "";
         Object[] valores = {"Nome", "Endereço", "Telefone"};
         
         for(i=0; i<clientes.size(); i++){
-            if(clientes.get(i).getCPF().equals(cliente.getCPF())){        
+            if(clientes.get(i).getCPF().equals(CPF)){        
                 Object selectedValue = JOptionPane.showInputDialog(null, "Escolha o campo para ser alterado", "Alteração Cliente", JOptionPane.INFORMATION_MESSAGE, null, valores, valores[0]);
                 if(selectedValue.equals(valores[0])){
                     novoValor = JOptionPane.showInputDialog(null, "Digite o novo nome", "Altera cliente", JOptionPane.INFORMATION_MESSAGE);
@@ -252,7 +256,7 @@ public class Loja {
         int i;
 
         for(i=0; i<clientes.size(); i++){
-            pw.println("Cliente " + (i+1) + ":" + clientes.get(i));
+            pw.println("Cliente " + (i+1) + ": " + clientes.get(i));
             pw.flush();
         }
         pw.close();
