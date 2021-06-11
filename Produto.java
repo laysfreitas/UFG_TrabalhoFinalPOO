@@ -36,4 +36,4 @@ public class Produto {
             String mensagem = "\nNome do produto: " + this.nome_produto + "\nDescrição: " + this.descricao + "\nQuantidade: " + this.quantidadeEstoque + "\nValor: " + this.valor_produto + "\n";
             return mensagem;
         }
-}
+}//
