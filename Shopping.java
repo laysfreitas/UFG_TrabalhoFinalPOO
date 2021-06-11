@@ -3,6 +3,8 @@ package projectfinalpoo;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.*;
+import java.lang.*;
 
 
 public class Shopping{
@@ -79,10 +81,10 @@ public class Shopping{
 	}
 	
 	/* Método que demite funcionário */
-	public void demiteFuncionario(Funcionario funcionario) throws IOException {
+	public void demiteFuncionario(String CPF) throws IOException {
 		
 		for(int i = 0 ; i < funcionarios.size() ; i++) {
-			if((funcionario.getCPF()).equals(funcionarios.get(i).getCPF())) {
+			if((CPF).equals(funcionarios.get(i).getCPF())) {
 				funcionarios.remove(i);
 			}
 		}
@@ -90,22 +92,63 @@ public class Shopping{
 		
 	}
         /* Método que altera funcionário*/
-        public void alteraFuncionario(Funcionario f) throws IOException{
+        public void alteraFuncionario(String CPF) throws IOException{
             int i;
+            String novoValor = "";
+            Object[] valores = {"Nome", "Endereço", "Telefone"};
+        
+            for(i=0; i<funcionarios.size(); i++){
+                if(funcionarios.get(i).getCPF().equals(CPF)){        
+                    Object selectedValue = JOptionPane.showInputDialog(null, "Escolha o campo para ser alterado", "Alteração Funcionário", JOptionPane.INFORMATION_MESSAGE, null, valores, valores[0]);
+                    if(selectedValue.equals(valores[0])){
+                        novoValor = JOptionPane.showInputDialog(null, "Digite o novo nome", "Altera Funcionário", JOptionPane.INFORMATION_MESSAGE);
+                        funcionarios.get(i).nome = novoValor;
+                    }
+                    if(selectedValue.equals(valores[1])){
+                        int numero;
+                        String rua, bairro, cep, complemento;
+                        rua = JOptionPane.showInputDialog(null, "Digite a rua", "Altera Endereço", JOptionPane.INFORMATION_MESSAGE);
+                        numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número", "Altera Endereço", JOptionPane.INFORMATION_MESSAGE));
+                        bairro = JOptionPane.showInputDialog(null, "Digite o bairro", "Altera Endereço", JOptionPane.INFORMATION_MESSAGE);
+                        cep = JOptionPane.showInputDialog(null, "Digite o CEP", "Altera Endereço", JOptionPane.INFORMATION_MESSAGE);
+                        complemento = JOptionPane.showInputDialog(null, "Digite o complemento", "Altera Endereço", JOptionPane.INFORMATION_MESSAGE);
+
+                        Endereco novo = new Endereco(rua, bairro, numero, cep, complemento);
+                        funcionarios.get(i).setEndereco(novo);
+                    }
+                    if(selectedValue.equals(valores[2])){
+                        novoValor = JOptionPane.showInputDialog(null, "Digite o novo telefone", "Altera Funcionario", JOptionPane.INFORMATION_MESSAGE);
+                        funcionarios.get(i).setTelefone(novoValor);
+                    }
+                }
+            salvarFuncionarios(funcionarios);
+            }
+        }
+        
+        /*Método que atribui salário a um funcionário*/
+        public void atribuiSalarioFuncionario(){
+            int i;
+            String CPF;
+            double valor;
+            
+            CPF = JOptionPane.showInputDialog(null, "Informe o CPF do funcionário", "Atribui Salário", JOptionPane.INFORMATION_MESSAGE);
             for(i=0; i<funcionarios.size();i++){
-                if(funcionarios.get(i).getCPF().equals(f.getCPF())){
-                    funcionarios.get(i).setSalario(5000);
+                if(funcionarios.get(i).getCPF().equals(CPF)){
+                    try{
+                        valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valor do salário", "Atribui salário", JOptionPane.INFORMATION_MESSAGE));
+                    }
+                    catch(Exception fee){
+                        System.out.println("Formato inválido");
+                    }
+                    
                 }
             }
-            salvarFuncionarios(funcionarios);
         }
         /* Método que salva funcionário em arquivo*/
         public void salvarFuncionarios(ArrayList<Funcionario> func) throws IOException{
             if(arqFunc.exists())
                 arqFunc.delete();
-            else{
-                File arqFunc = new File("funcionariosShopping.txt"); 
-            }
+            File arqFunc = new File("funcionariosShopping.txt"); 
             FileWriter fw = new FileWriter(arqFunc, true);
             PrintWriter pw = new PrintWriter(fw);
 
@@ -118,6 +161,7 @@ public class Shopping{
             pw.close();
             
         }
+        /*Método que mostra os funcionários do arquvivo*/
         public void mostrarFuncionarios() throws FileNotFoundException, IOException{
             FileReader f = new FileReader("funcionariosShopping.txt");
             BufferedReader in = new BufferedReader(f);
@@ -128,17 +172,17 @@ public class Shopping{
             f.close();
             in.close();
         }
-        
-        public void desligaLoja(Loja loja) throws IOException{
+        /*Método que exclui loja*/
+        public void desligaLoja(int numLoja) throws IOException{
             int i;
             for(i=0; i<lojas.size(); i++){
-                if(lojas.get(i).numero==loja.numero){
+                if(lojas.get(i).numero==numLoja){
                     lojas.remove(i);
                 }
             }
             salvarLojas(lojas);
         }
-        
+        /*Método que salva lojas em arquivo*/
         public void salvarLojas(ArrayList<Loja> lojas) throws IOException{
             if(arqLoja.exists())
                 arqLoja.delete();
@@ -156,7 +200,7 @@ public class Shopping{
             }
             pw.close();
         }
-        
+        /*Método que imprime lojas*/
         public void imprimeLojas() throws FileNotFoundException, IOException{
             FileReader f = new FileReader("lojasShopping.txt");
             BufferedReader in = new BufferedReader(f);
