@@ -18,15 +18,18 @@ public class ContaCliente {
     public Date data; // data de criação da conta
     public Loja loja;
     public int numLoja;
+    public int numeroConta;
     public Compra compra;
 
     File arqCompras = new File("comprasCliente.txt");
     
     /* Construtor da classe ContaCliente*/
-    public ContaCliente(Cliente cliente, Date data, int numLoja) {
+    public ContaCliente(Cliente cliente, Date data, int numLoja, Shopping shopping, int numeroConta) {
     	this.cliente = cliente;
     	this.data = data;
     	this.numLoja = numLoja;
+        this.shopping = shopping;
+        this.numeroConta = numeroConta;
         setLoja();
     }
     
@@ -37,18 +40,24 @@ public class ContaCliente {
         }
     }
     
-    public void registraCompra(Cliente cliente) throws IOException{
-        int numero, cod, qtd;
+    public void registraCompra(Cliente cliente, int numLoja) throws IOException{
+        int cod, qtd;
         String nomeVend;
-        numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da loja", "Compra", JOptionPane.INFORMATION_MESSAGE));
         nomeVend = JOptionPane.showInputDialog(null, "Digite o nome do vendendor", "Compra", JOptionPane.INFORMATION_MESSAGE);
         compra = new Compra(loja, nomeVend);
         
-        int i;
+        int i, flag=0;
+       
         for(i=0; i<shopping.lojas.size(); i++){
-            if(shopping.lojas.get(i).numero==numero)
+            if(shopping.lojas.get(i).numero==numLoja){
                 this.loja = shopping.lojas.get(i);
+                flag++;
+            }   
         }
+        if(flag==0){
+            throw new NoExistsException("Essa loja não existe");
+        }
+        
         loja.imprimirEstoque();
         
         cod = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do produto a ser comprado", "Compra", JOptionPane.INFORMATION_MESSAGE));
@@ -87,7 +96,7 @@ public class ContaCliente {
         int i;
 
         for(i=0; i<compras.size(); i++){
-            pw.println("Compra " + (i+1) + ":" + compras.get(i));
+            pw.println("Compra " + (i+1) + ":" + compras.get(i).emitirComprovante());
             pw.flush();
         }
         pw.close();
@@ -101,35 +110,44 @@ public class ContaCliente {
         while((s = in.readLine())!= null){
             total+=s + "\n";
         }
-        JOptionPane.showMessageDialog(null, "Lista de Compras", "Compras", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, total, "Compras", JOptionPane.PLAIN_MESSAGE);
         f.close();
         in.close();
     }
     
     /* Método que faz a troca de dois produtos de uma compra */
-    public void solicitaTroca(int codProduto1, int codProduto2, int codigoCompra, int codProduto) throws IOException{
+    public void solicitaTroca(int codProduto1, int codProduto2, int codigoCompra) throws IOException{
     	for(int i = 0; i < compras.size(); i++) {
             if(compras.get(i).codigo == codigoCompra ) {
                 for(int j=0; j<compras.get(i).produtos.size();j++){
-                    if(compras.get(i).produtos.get(j).codigo==codProduto){
-                        compras.get(i).produtos.get(j).quantidadeCompra--;
-                        compras.get(i).produtos.get(j).acrescentaEstoque(codProduto);
+                    if(compras.get(i).produtos.get(j).codigo==codProduto1){
                         compras.get(i).produtos.remove(j);
+                        
                         for(int y = 0; y<loja.produtos.size(); y++){
-                            if(loja.produtos.get(i).codigo==codProduto2){
-                                compras.get(i).adicionaProdutos(loja.produtos.get(i), 1);
+                            if(loja.produtos.get(y).codigo==codProduto2){
+                                compras.get(i).adicionaProdutos(loja.produtos.get(y), 1);
+                                compras.get(i).produtos.get(y).quantidadeCompra++;
                             }
                         }
                     }
                 }
             }
     	}
+        for(int i=0; i<loja.produtos.size();i++){
+            if(loja.produtos.get(i).codigo==codProduto1){
+                loja.produtos.get(i).acrescentaEstoque(1);
+            }
+            if(loja.produtos.get(i).codigo==codProduto2){
+                loja.produtos.get(i).vender(i);
+            }
+        }
         salvaHistorico();
     }
     
     public String toString() {
-        String mensagem = "\nCliente: " + this.cliente + "\nLoja: " + this.loja + "\nData criação: " + this.data + "\n";
+        String mensagem = "\nCliente: " + this.cliente + "\nLoja: " + this.loja + "\nData criação: " + this.data + "\n" + "Número da conta: " + this.numeroConta + "\n";
     	return mensagem;
     }
+
 
 }
